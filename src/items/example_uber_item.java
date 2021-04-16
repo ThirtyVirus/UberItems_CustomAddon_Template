@@ -2,8 +2,10 @@ package items;
 
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -14,17 +16,17 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import thirtyvirus.uber.UberItem;
-import thirtyvirus.uber.UberItems;
 import thirtyvirus.uber.helpers.UberAbility;
+import thirtyvirus.uber.helpers.UberCraftingRecipe;
 import thirtyvirus.uber.helpers.UberRarity;
+import thirtyvirus.uber.helpers.Utilities;
 
-// a template class that can be copy - pasted and renamed when making new Uber Items
 public class example_uber_item extends UberItem {
 
-    public example_uber_item(int id, UberRarity rarity, String name, Material material, boolean stackable, boolean oneTimeUse, boolean hasActiveEffect, List<UberAbility> abilities) {
-        super(id, rarity, name, material, stackable, oneTimeUse, hasActiveEffect, abilities);
+    public example_uber_item(int id, UberRarity rarity, String name, Material material, boolean stackable, boolean oneTimeUse, boolean hasActiveEffect, List<UberAbility> abilities, UberCraftingRecipe craftingRecipe) {
+        super(id, rarity, name, material, stackable, oneTimeUse, hasActiveEffect, abilities, craftingRecipe);
     }
-    public void onItemStackCreate(ItemStack item) { }
+    public void onItemStackCreate(ItemStack item) { Utilities.addEnchantGlint(item); }
     public void getSpecificLorePrefix(List<String> lore, ItemStack item) { }
     public void getSpecificLoreSuffix(List<String> lore, ItemStack item) {
         lore.add(ChatColor.YELLOW + "This is the template item");
@@ -41,6 +43,11 @@ public class example_uber_item extends UberItem {
     public void middleClickAction(Player player, ItemStack item) { }
     public void hitEntityAction(Player player, EntityDamageByEntityEvent event, Entity target, ItemStack item) { }
     public void breakBlockAction(Player player, BlockBreakEvent event, Block block, ItemStack item) { }
-    public void clickedInInventoryAction(Player player, InventoryClickEvent event) { }
+    public void clickedInInventoryAction(Player player, InventoryClickEvent event, ItemStack item, ItemStack addition) {
+        Bukkit.getLogger().info("hello?");
+        Utilities.addEnchantGlint(addition);
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,1,1);
+        event.setCancelled(true);
+    }
     public void activeEffect(Player player, ItemStack item) { }
 }

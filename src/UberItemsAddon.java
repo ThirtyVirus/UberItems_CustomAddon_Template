@@ -1,13 +1,17 @@
 import items.example_uber_item;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import thirtyvirus.uber.UberItems;
+import thirtyvirus.uber.UberMaterial;
 import thirtyvirus.uber.helpers.AbilityType;
 import thirtyvirus.uber.helpers.UberAbility;
+import thirtyvirus.uber.helpers.UberCraftingRecipe;
 import thirtyvirus.uber.helpers.UberRarity;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class UberItemsAddon extends JavaPlugin {
 
@@ -22,6 +26,7 @@ public class UberItemsAddon extends JavaPlugin {
 
         // register events and UberItems
         registerEvents();
+        registerUberMaterials();
         registerUberItems();
 
         // post confirmation in chat
@@ -59,6 +64,33 @@ public class UberItemsAddon extends JavaPlugin {
     //      (the same case for strings, just storeStringInItem and getStringFromItem)
 
     private void registerUberItems() {
-        UberItems.putItem("example_uber_item", new example_uber_item(100, UberRarity.UNFINISHED, "NAME", Material.STONE, false, false, false, Arrays.asList(new UberAbility("Ability Name!", AbilityType.RIGHT_CLICK, "Ability description"))));
+        UberItems.putItem("example_uber_item", new example_uber_item(1000, UberRarity.UNFINISHED, "Example Uber Item",
+                Material.DIAMOND_SHOVEL,  false, false, true,
+                Collections.singletonList(new UberAbility("Example Ability", AbilityType.RIGHT_CLICK, "Adds an enchantment glint to items when they are clicked onto this item in the inventory... because why not? xD")),
+                new UberCraftingRecipe(Arrays.asList(
+                        UberItems.getMaterial("enchanted_chest").makeItem(1),
+                        UberItems.getMaterial("enchanted_diamond").makeItem(1),
+                        UberItems.getMaterial("enchanted_chest").makeItem(1),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.STICK, 8),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.STICK, 8),
+                        new ItemStack(Material.AIR)), false, 1)));
+    }
+    private void registerUberMaterials() {
+        UberItems.putMaterial("enchanted_sponge", new UberMaterial(Material.SPONGE,
+                "Enchanted Sponge", UberRarity.RARE, true, false, false,
+                "idk why I chose sponge, but hey this demonstrates how to make a custom UberMaterial lol",
+                new UberCraftingRecipe(Arrays.asList(
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.SPONGE, 32),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.SPONGE, 32),
+                        new ItemStack(Material.SPONGE, 32),
+                        new ItemStack(Material.SPONGE, 32),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.SPONGE, 32),
+                        new ItemStack(Material.AIR)), false, 1)));
     }
 }
