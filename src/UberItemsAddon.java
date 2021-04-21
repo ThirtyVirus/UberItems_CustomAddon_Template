@@ -64,8 +64,8 @@ public class UberItemsAddon extends JavaPlugin {
     //      (the same case for strings, just storeStringInItem and getStringFromItem)
 
     private void registerUberItems() {
-        UberItems.putItem("example_uber_item", new example_uber_item(1000, UberRarity.UNFINISHED, "Example Uber Item",
-                Material.DIAMOND_SHOVEL,  false, false, true,
+        UberItems.putItem("example_uber_item", new example_uber_item(Material.DIAMOND_SHOVEL, "Example Uber Item",
+                UberRarity.UNFINISHED, false, false, true,
                 Collections.singletonList(new UberAbility("Example Ability", AbilityType.RIGHT_CLICK, "Adds an enchantment glint to items when they are clicked onto this item in the inventory... because why not? xD")),
                 new UberCraftingRecipe(Arrays.asList(
                         UberItems.getMaterial("enchanted_chest").makeItem(1),
