@@ -1,3 +1,4 @@
+import items.empty_item;
 import items.example_uber_item;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -64,9 +65,15 @@ public class UberItemsAddon extends JavaPlugin {
     //      (the same case for strings, just storeStringInItem and getStringFromItem)
 
     private void registerUberItems() {
-        UberItems.putItem("example_uber_item", new example_uber_item(Material.DIAMOND_SHOVEL, "Example Uber Item",
+        UberItems.putItem("empty_item", new empty_item(Material.DIAMOND, "Empty UberItem", UberRarity.COMMON,
+                false, false, false, Collections.emptyList(), null));
+
+        UberItems.putItem("example_uber_item", new example_uber_item(Material.WOODEN_SHOVEL, "Example Uber Item",
                 UberRarity.UNFINISHED, false, false, true,
-                Collections.singletonList(new UberAbility("Example Ability", AbilityType.RIGHT_CLICK, "Adds an enchantment glint to items when they are clicked onto this item in the inventory... because why not? xD")),
+                Arrays.asList(
+                        new UberAbility("Example Ability", AbilityType.NONE, "Adds an enchantment glint to items when they are clicked onto this item in the inventory... because why not? xD"),
+                        new UberAbility("Cooldown Demonstration", AbilityType.LEFT_CLICK, "Makes a sound? Idk you can only do it once every 5 seconds", 5),
+                        new UberAbility("Midas Step", AbilityType.RIGHT_CLICK, "(toggle) every block you step on turns into gold while holding this item")),
                 new UberCraftingRecipe(Arrays.asList(
                         UberItems.getMaterial("enchanted_chest").makeItem(1),
                         UberItems.getMaterial("enchanted_diamond").makeItem(1),
