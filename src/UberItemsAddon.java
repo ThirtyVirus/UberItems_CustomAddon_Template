@@ -1,6 +1,10 @@
+import events.ProjectileHit;
 import items.empty_item;
 import items.example_uber_item;
+import items.infina_pearl;
+import items.midas_statue;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -38,7 +42,7 @@ public class UberItemsAddon extends JavaPlugin {
         getLogger().info(getDescription().getName() + " V: " + getDescription().getVersion() + " has been disabled");
     }
     private void registerEvents() {
-
+        getServer().getPluginManager().registerEvents(new ProjectileHit(), this);
     }
 
     // NEW UBER ITEM CHECKLIST
@@ -84,6 +88,38 @@ public class UberItemsAddon extends JavaPlugin {
                         new ItemStack(Material.AIR),
                         new ItemStack(Material.STICK, 8),
                         new ItemStack(Material.AIR)), false, 1)));
+
+        UberItems.putItem("midas_statue", new midas_statue(Material.TOTEM_OF_UNDYING, "Midas Statue", UberRarity.LEGENDARY,
+                false, false, true,
+                Arrays.asList(
+                        new UberAbility("Midas Step", AbilityType.RIGHT_CLICK, "(toggle) every block you step on turns into gold while holding this item"),
+                        new UberAbility("Midas Touch", AbilityType.NONE, "Turn any mobs into gold")),
+                new UberCraftingRecipe(Arrays.asList(
+                        new ItemStack(Material.AIR),
+                        UberItems.getMaterial("enchanted_diamond").makeItem(64),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.GOLD_BLOCK),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.GOLD_BLOCK),
+                        new ItemStack(Material.AIR)), false, 1 )));
+
+        UberItems.putItem("infina_pearl", new infina_pearl(Material.ENDER_PEARL, "Infina-Pearl", UberRarity.EPIC,
+                false, false, false,
+                Collections.singletonList(
+                        new UberAbility("Infinawarp", AbilityType.RIGHT_CLICK, "Throw an ender pearl that doesn't run out, and you don't take damage on impact")),
+                new UberCraftingRecipe(Arrays.asList(
+                        new ItemStack(Material.AIR),
+                        UberItems.getMaterial("enchanted_ender_pearl").makeItem(16),
+                        new ItemStack(Material.AIR),
+                        UberItems.getMaterial("enchanted_ender_pearl").makeItem(16),
+                        new ItemStack(Material.NETHER_STAR),
+                        UberItems.getMaterial("enchanted_ender_pearl").makeItem(16),
+                        new ItemStack(Material.AIR),
+                        UberItems.getMaterial("enchanted_ender_pearl").makeItem(16),
+                        new ItemStack(Material.AIR)), false, 1 )));
+
     }
     private void registerUberMaterials() {
         UberItems.putMaterial("enchanted_sponge", new UberMaterial(Material.SPONGE,
@@ -99,5 +135,9 @@ public class UberItemsAddon extends JavaPlugin {
                         new ItemStack(Material.AIR),
                         new ItemStack(Material.SPONGE, 32),
                         new ItemStack(Material.AIR)), false, 1)));
+        UberItems.putMaterial("thumbnail", new UberMaterial(Material.GOLDEN_APPLE,
+                "Titan Apple", UberRarity.MYTHIC, true, false, false,
+                "" + ChatColor.GRAY + ChatColor.ITALIC + "look at what they /newline " + ChatColor.ITALIC + "need to mimic a /newline " + ChatColor.ITALIC + "fraction of our power",
+                null));
     }
 }
