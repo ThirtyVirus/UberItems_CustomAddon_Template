@@ -1,7 +1,6 @@
 import events.ProjectileHit;
 import items.empty_item;
 import items.example_uber_item;
-import items.infina_pearl;
 import items.midas_statue;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -103,21 +102,6 @@ public class UberItemsAddon extends JavaPlugin {
                         new ItemStack(Material.AIR),
                         new ItemStack(Material.AIR),
                         new ItemStack(Material.GOLD_BLOCK),
-                        new ItemStack(Material.AIR)), false, 1 )));
-
-        UberItems.putItem("infina_pearl", new infina_pearl(Material.ENDER_PEARL, "Infina-Pearl", UberRarity.EPIC,
-                false, false, false,
-                Collections.singletonList(
-                        new UberAbility("Infinawarp", AbilityType.RIGHT_CLICK, "Throw an ender pearl that doesn't run out, and you don't take damage on impact")),
-                new UberCraftingRecipe(Arrays.asList(
-                        new ItemStack(Material.AIR),
-                        UberItems.getMaterial("enchanted_ender_pearl").makeItem(16),
-                        new ItemStack(Material.AIR),
-                        UberItems.getMaterial("enchanted_ender_pearl").makeItem(16),
-                        new ItemStack(Material.NETHER_STAR),
-                        UberItems.getMaterial("enchanted_ender_pearl").makeItem(16),
-                        new ItemStack(Material.AIR),
-                        UberItems.getMaterial("enchanted_ender_pearl").makeItem(16),
                         new ItemStack(Material.AIR)), false, 1 )));
 
     }

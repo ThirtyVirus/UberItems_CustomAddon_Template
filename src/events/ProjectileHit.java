@@ -1,6 +1,5 @@
 package events;
 
-import items.infina_pearl;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
